@@ -17,7 +17,7 @@ export default class Header extends Component {
             selectedValue={this.props.selectedValue}
             onValueChange={this.props.onValueChange}
             style={styles.picker}>
-            <Picker.Item label="Choose User" value={-1} />
+            <Picker.Item label="All users" value={-1} />
             {this.props.dataOfUsers.map((i, _) => (
               <Picker.Item
                 key={i.id}
@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
   picker: {
     height: 60,
     width: '100%',
-    left: 212,
+    left: 245,
     color: 'white',
     fontSize: 20,
   },
