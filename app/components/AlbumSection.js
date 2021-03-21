@@ -13,7 +13,7 @@ export default class AlbumSection extends Component {
   onPressFunc = () => {
     this.props.navigation.navigate('Photos', {
       photosOfAlbum: this.props.photosOfAlbum,
-      albumTitle: this.props.albumTitle,
+      albumData: this.props.albumData,
     });
   };
   render() {
@@ -21,13 +21,13 @@ export default class AlbumSection extends Component {
       <View style={styles.container}>
         <View style={styles.thumbnailImages}>
           <View style={styles.rowBetweenImage}>
-            {this.props.photosOfAlbum.length > 1 ? (
+            {this.props.photosOfAlbum.length > 0 ? (
               <Image
                 source={{uri: this.props.photosOfAlbum[0].thumbnailUrl}}
                 style={styles.thumbnailImage}
               />
             ) : null}
-            {this.props.photosOfAlbum.length > 2 ? (
+            {this.props.photosOfAlbum.length > 1 ? (
               <Image
                 source={{uri: this.props.photosOfAlbum[1].thumbnailUrl}}
                 style={styles.thumbnailImage}
@@ -43,22 +43,26 @@ export default class AlbumSection extends Component {
             ) : null}
             {this.props.photosOfAlbum.length > 3 ? (
               <View style={styles.numberWithImageView}>
-                <Image
-                  source={{uri: this.props.photosOfAlbum[3].thumbnailUrl}}
-                  style={styles.thumbnailImage}
-                />
-                <Text style={styles.number}>
-                  +{this.props.photosOfAlbum.length - 4}
-                </Text>
+                <TouchableOpacity
+                  style={styles.numberWithImageViewTouchableOpacity}
+                  onPress={this.onPressFunc}>
+                  <Image
+                    source={{uri: this.props.photosOfAlbum[3].thumbnailUrl}}
+                    style={styles.thumbnailImage}
+                  />
+                  <Text style={styles.number}>
+                    +{this.props.photosOfAlbum.length - 3}
+                  </Text>
+                </TouchableOpacity>
               </View>
             ) : null}
           </View>
         </View>
         <View style={styles.detailsContainer}>
-          <Text style={styles.albumTitle}>{this.props.albumTitle}</Text>
-          <Text style={styles.ownerName}>{this.props.name}</Text>
-          <Text style={styles.emailText}>{this.props.email}</Text>
-          <Text style={styles.websiteText}>{this.props.website}</Text>
+          <Text style={styles.albumTitle}>{this.props.albumData.title}</Text>
+          <Text style={styles.ownerName}>{this.props.userObj.name}</Text>
+          <Text style={styles.emailText}>{this.props.userObj.email}</Text>
+          <Text style={styles.websiteText}>{this.props.userObj.website}</Text>
           <View style={styles.buttonView}>
             <TouchableOpacity
               style={styles.TouchableOpacity}
@@ -97,16 +101,20 @@ const styles = StyleSheet.create({
   numberWithImageView: {
     flex: 1,
     borderRadius: 10,
-    margin: 2,
+  },
+  numberWithImageViewTouchableOpacity: {
+    flex: 1,
+    borderRadius: 10,
   },
   rowBetweenImage: {flexDirection: 'row', flex: 1},
   number: {
     position: 'absolute',
-    color: 'black',
+    color: 'white',
     fontSize: 20,
     alignSelf: 'center',
     bottom: '30%',
     fontWeight: 'bold',
+    elevation: 50,
   },
   albumTitle: {
     color: 'white',
