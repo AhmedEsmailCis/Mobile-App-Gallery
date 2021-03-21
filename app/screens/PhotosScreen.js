@@ -15,11 +15,9 @@ export default class PhotosScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      activeImageValue: this.props.navigation.state.params.photosOfAlbum[0]
-        .photoId,
+      activeImageValue: this.props.navigation.state.params.photosOfAlbum[0].id,
       activeImageUrl: this.props.navigation.state.params.photosOfAlbum[0].url,
-      photoTitle: this.props.navigation.state.params.photosOfAlbum[0]
-        .photoTitle,
+      photoTitle: this.props.navigation.state.params.photosOfAlbum[0].title,
     };
   }
   _keyExtractor = (item, _) => item.photoId.toString();
@@ -40,28 +38,28 @@ export default class PhotosScreen extends Component {
         </View>
         <View style={styles.textContainer}>
           <Text style={styles.albumTitle}>
-            {this.props.navigation.state.params.albumTitle}
+            {this.props.navigation.state.params.albumData.title}
           </Text>
           <Text style={styles.photoTitle}>{this.state.photoTitle}</Text>
         </View>
         <ScrollView horizontal>
-          {this.props.navigation.state.params.photosOfAlbum.map((i, k) => (
-            <View style={styles.containerOfSmallImage} key={i.photoId}>
+          {this.props.navigation.state.params.photosOfAlbum.map((i, _) => (
+            <View style={styles.containerOfSmallImage} key={i.id}>
               <TouchableOpacity
                 style={styles.TouchableOpacityImage}
                 onPress={() => {
                   this.setState({
-                    activeImageValue: i.photoId,
+                    activeImageValue: i.id,
                     activeImageUrl: i.url,
-                    photoTitle: i.photoTitle,
+                    photoTitle: i.title,
                   });
                 }}>
                 <Image
                   source={{
-                    uri: i.url,
+                    uri: i.thumbnailUrl,
                   }}
                   style={
-                    this.state.activeImageValue === i.photoId
+                    this.state.activeImageValue === i.id
                       ? styles.activeSmallImage
                       : styles.smallImage
                   }
@@ -77,14 +75,14 @@ export default class PhotosScreen extends Component {
 //styles
 const styles = StyleSheet.create({
   bigImage: {
-    height: width * 0.9,
-    width: width * 0.8,
+    height: width * 0.95,
+    width: width * 0.95,
     borderRadius: 10,
     backgroundColor: '#F0F2F5',
   },
   containerOfBigImage: {
-    height: width * 0.9,
-    width: width * 0.8,
+    height: width * 0.95,
+    width: width * 0.95,
     borderRadius: 10,
     margin: 20,
     justifyContent: 'center',
@@ -102,29 +100,29 @@ const styles = StyleSheet.create({
   },
   textContainer: {
     width: '100%',
-    paddingLeft: 35,
-
+    paddingLeft: 10,
+    paddingRight: 10,
     marginBottom: 10,
   },
   activeSmallImage: {
-    height: 90,
-    width: 90,
+    height: 80,
+    width: 80,
     borderRadius: 10,
     borderColor: 'white',
     borderWidth: 3,
     backgroundColor: '#F0F2F5',
   },
   smallImage: {
-    height: 90,
-    width: 90,
+    height: 80,
+    width: 80,
     borderRadius: 10,
     backgroundColor: '#F0F2F5',
   },
   containerOfSmallImage: {
-    height: 90,
-    width: 90,
+    height: 80,
+    width: 80,
     borderRadius: 10,
-    margin: 10,
+    margin: 7,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -138,6 +136,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#13245C',
     flex: 1,
     alignItems: 'center',
+    justifyContent: 'center',
   },
   headerStyle: {
     backgroundColor: '#1F2E65',
