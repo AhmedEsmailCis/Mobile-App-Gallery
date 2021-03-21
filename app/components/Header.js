@@ -1,25 +1,8 @@
 import React, {Component} from 'react';
-import {Text, View, StyleSheet, Picker} from 'react-native';
+import {Text, View, StyleSheet} from 'react-native';
+import {Picker} from '@react-native-community/picker';
 import Icon from 'react-native-vector-icons/Ionicons';
-import Axios from 'axios';
-// create Component
 export default class Header extends Component {
-  constructor() {
-    super();
-    this.state = {
-      dataOfUser: [],
-    };
-  }
-  componentDidMount() {
-    this.loadPicker();
-  }
-  loadPicker = async () => {
-    const request = await Axios.get(
-      'https://jsonplaceholder.typicode.com/users',
-    );
-    this.setState({dataOfUser: request.data});
-  };
-  _keyExtractor = (item, _) => item.id.toString();
   render() {
     return (
       <View>
@@ -35,7 +18,7 @@ export default class Header extends Component {
             onValueChange={this.props.onValueChange}
             style={styles.picker}>
             <Picker.Item label="Choose User" value={-1} />
-            {this.state.dataOfUser.map((i, _) => (
+            {this.props.dataOfUsers.map((i, _) => (
               <Picker.Item
                 key={i.id}
                 label={'User ' + i.id.toString()}
