@@ -1,0 +1,43 @@
+{
+  // yarn add -D eslint babel-eslint eslint-config-airbnb eslint-plugin-import eslint-plugin-react eslint-plugin-react-hooks eslint-plugin-react-native eslint-plugin-jsx-a11y prettier eslint-config-prettier eslint-plugin-prettier
+  "env": {
+    "browser": true,
+    "es6": true,
+    "node": true
+  },
+  "extends": [
+    "plugin:react/recommended",
+    "airbnb",
+    "prettier",
+    "plugin:prettier/recommended",
+    "eslint-config-prettier"
+  ],
+  "globals": {
+    "Atomics": "readonly",
+    "SharedArrayBuffer": "readonly"
+  },
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": 2018,
+    "sourceType": "module"
+  },
+  "parser": "babel-eslint",
+  "plugins": ["react", "react-native", "react-hooks", "prettier"],
+  "rules": {
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "no-use-before-define": ["error", { "variables": false }],
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
+    "import/prefer-default-export": "off",
+    "react-native/no-unused-styles": "warn",
+    "react-native/split-platform-components": 2,
+    "react-native/no-inline-styles": 2,
+    "react-native/no-color-literals": "off",
+    "react-native/no-raw-text": 0,
+    "react-native/no-single-element-style-arrays": 2,
+    "react/jsx-props-no-spreading": ["error", { "custom": "ignore" }],
+    "react/prop-types": 0
+  }
+}
