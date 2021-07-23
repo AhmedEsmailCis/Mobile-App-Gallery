@@ -12,6 +12,7 @@ export default class PhotosScreen extends Component {
       photoTitle: this.props.navigation.state.params.photosOfAlbum[0].title,
     };
   }
+  
   smallPhotoOnPress = (item) => {
     this.setState({
       activeImageValue: item.id,
