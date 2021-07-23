@@ -42,8 +42,9 @@ const styles = StyleSheet.create({
   },
   label: {
     color: 'white',
-    fontSize: 20,
+    fontSize: 30,
     left: 10,
+    fontFamily: 'FontAwesome5_Brands',
   },
   filterIcon: {
     color: 'white',
