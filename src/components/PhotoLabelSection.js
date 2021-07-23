@@ -1,6 +1,7 @@
-import React, {Component} from 'react';
-import {View, StyleSheet, Text} from 'react-native';
-export default class PhotoLabelSection extends Component {
+import React, { PureComponent } from "react";
+import { View, StyleSheet, Text } from "react-native";
+
+export default class PhotoLabelSection extends PureComponent {
   render() {
     return (
       <View style={styles.textContainer}>
@@ -10,20 +11,20 @@ export default class PhotoLabelSection extends Component {
     );
   }
 }
-//styles
+// styles
 const styles = StyleSheet.create({
   albumTitle: {
     fontSize: 15,
-    color: 'white',
-    fontWeight: 'bold',
+    color: "white",
+    fontWeight: "bold",
   },
   photoTitle: {
     marginTop: 10,
     fontSize: 12,
-    color: 'grey',
+    color: "grey",
   },
   textContainer: {
-    width: '100%',
+    width: "100%",
     paddingLeft: 10,
     paddingRight: 10,
     marginBottom: 10,

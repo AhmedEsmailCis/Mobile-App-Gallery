@@ -1,14 +1,8 @@
-import React, {Component} from 'react';
-import {
-  View,
-  StyleSheet,
-  FlatList,
-  ActivityIndicator,
-  StatusBar,
-} from 'react-native';
-import Header from '../components/Header';
-import AlbumSection from '../components/AlbumSection';
-import Axios from 'axios';
+import React, { Component } from "react";
+import { View, StyleSheet, FlatList, ActivityIndicator, StatusBar } from "react-native";
+import Axios from "axios";
+import Header from "../components/Header";
+import AlbumSection from "../components/AlbumSection";
 // create Component
 export default class AlbumsScreen extends Component {
   constructor() {
@@ -20,19 +14,21 @@ export default class AlbumsScreen extends Component {
       dataOfUsers: [],
     };
   }
+
   componentDidMount = async () => {
     this.loadUserData();
     this.loadData(this.state.pickerValue);
   };
+
   loadData = async (pickerValue) => {
-    this.setState({loader: true});
+    this.setState({ loader: true });
     const dataOfAlbums = await this.loadAlbumsData(pickerValue);
-    let {generationArray, dataOfUsers} = this.state;
+    let { generationArray, dataOfUsers } = this.state;
     generationArray = [];
     for (let i = 0; i < dataOfAlbums.length; i++) {
-      const photoUrl =
-        'https://jsonplaceholder.typicode.com/photos?albumId=' +
-        dataOfAlbums[i].id.toString();
+      const photoUrl = `https://jsonplaceholder.typicode.com/photos?albumId=${dataOfAlbums[
+        i
+      ].id.toString()}`;
       const requestPhotoData = await Axios.get(photoUrl);
       for (let j = 0; j < dataOfUsers.length; j++) {
         if (dataOfUsers[j].id === dataOfAlbums[i].userId) {
@@ -46,28 +42,30 @@ export default class AlbumsScreen extends Component {
         }
       }
     }
-    this.setState({loader: false, generationArray});
+    this.setState({ loader: false, generationArray });
   };
+
   loadAlbumsData = async (pickerValue) => {
     const albumUrl =
       pickerValue === -1
-        ? 'https://jsonplaceholder.typicode.com/albums'
-        : 'https://jsonplaceholder.typicode.com/albums?userId=' +
-          pickerValue.toString();
+        ? "https://jsonplaceholder.typicode.com/albums"
+        : `https://jsonplaceholder.typicode.com/albums?userId=${pickerValue.toString()}`;
     const requestAlbumsData = await Axios.get(albumUrl);
     return requestAlbumsData.data;
   };
+
   loadUserData = async () => {
-    const request = await Axios.get(
-      'https://jsonplaceholder.typicode.com/users',
-    );
-    this.setState({dataOfUsers: request.data});
+    const request = await Axios.get("https://jsonplaceholder.typicode.com/users");
+    this.setState({ dataOfUsers: request.data });
   };
+
   onValueChangeForPicker = (itemValue, _) => {
-    this.setState({pickerValue: itemValue});
+    this.setState({ pickerValue: itemValue });
     this.loadData(itemValue);
   };
+
   _keyExtractor = (item, _) => item.albumData.id.toString();
+
   render() {
     return (
       <View style={styles.albumsScreen}>
@@ -85,7 +83,7 @@ export default class AlbumsScreen extends Component {
           <FlatList
             keyExtractor={this._keyExtractor}
             data={this.state.generationArray}
-            renderItem={({item}) => (
+            renderItem={({ item }) => (
               <AlbumSection
                 userObj={item.userObj}
                 albumData={item.albumData}
@@ -101,11 +99,11 @@ export default class AlbumsScreen extends Component {
 }
 const styles = StyleSheet.create({
   loaderStyle: {
-    justifyContent: 'center',
-    height: '70%',
+    justifyContent: "center",
+    height: "70%",
   },
   albumsScreen: {
-    backgroundColor: '#13245C',
+    backgroundColor: "#13245C",
     flex: 1,
   },
 });

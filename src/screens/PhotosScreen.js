@@ -1,8 +1,9 @@
-import React, {Component} from 'react';
-import {View, StyleSheet, StatusBar, Text, ScrollView} from 'react-native';
-import ImageContainer from '../components/ImageContainer';
-import PhotoLabelSection from '../components/PhotoLabelSection';
-import ImagesScrollView from '../components/ImagesScrollView';
+import React, { Component } from "react";
+import { View, StyleSheet, StatusBar, Text, ScrollView } from "react-native";
+import ImageContainer from "../components/ImageContainer";
+import PhotoLabelSection from "../components/PhotoLabelSection";
+import ImagesScrollView from "../components/ImagesScrollView";
+
 export default class PhotosScreen extends Component {
   constructor(props) {
     super(props);
@@ -12,7 +13,7 @@ export default class PhotosScreen extends Component {
       photoTitle: this.props.navigation.state.params.photosOfAlbum[0].title,
     };
   }
-  
+
   smallPhotoOnPress = (item) => {
     this.setState({
       activeImageValue: item.id,
@@ -20,6 +21,7 @@ export default class PhotosScreen extends Component {
       photoTitle: item.title,
     });
   };
+
   render() {
     return (
       <View style={styles.view}>
@@ -47,24 +49,24 @@ export default class PhotosScreen extends Component {
     );
   }
 }
-//styles
+// styles
 const styles = StyleSheet.create({
   view: {
-    backgroundColor: '#13245C',
+    backgroundColor: "#13245C",
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   },
   headerStyle: {
-    backgroundColor: '#1F2E65',
-    width: '100%',
+    backgroundColor: "#1F2E65",
+    width: "100%",
     height: 70,
-    justifyContent: 'center',
-    alignItems: 'center',
-    flexDirection: 'row',
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "row",
   },
   headerLabel: {
-    color: 'white',
+    color: "white",
     fontSize: 20,
     left: 10,
   },

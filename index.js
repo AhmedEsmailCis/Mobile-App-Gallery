@@ -1,4 +1,10 @@
-import {AppRegistry} from 'react-native';
-import App from './app/App';
+/**
+ * @format
+ */
 
-AppRegistry.registerComponent('checklist', () => App);
+import "react-native-gesture-handler";
+import { AppRegistry } from "react-native";
+import App from "./src/app";
+import { name as appName } from "./app.json";
+
+AppRegistry.registerComponent(appName, () => App);
